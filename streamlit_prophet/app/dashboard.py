@@ -53,7 +53,7 @@ config, instructions, readme = load_config(
 )
 
 # Initialization
-dates: Dict[Any, Any] = dict()
+dates: Dict[Any, Any] = {}
 report: List[Dict[str, Any]] = []
 
 # Info

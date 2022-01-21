@@ -84,8 +84,7 @@ str_short_cat = [
 ]
 
 # Test dataframes
-df_test = dict()
-df_test[0] = pd.DataFrame()
+df_test = {0: pd.DataFrame()}
 df_test[1] = make_test_df(
     cols={0: {"cat": ["A", "B", "C"]}, 1: {"cat": ["A", "B"]}, 2: {"cat": ["A"]}, 3: {}}
 )

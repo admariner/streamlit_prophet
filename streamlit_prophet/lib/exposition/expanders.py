@@ -29,39 +29,51 @@ def plot_cv_dates(
     fig.add_trace(
         go.Bar(
             y=list(cv_dates.keys()),
-            x=[cv_dates[fold]["val_end"] for fold in cv_dates.keys()],
+            x=[cv_dates[fold]["val_end"] for fold in cv_dates],
             name="",
             orientation="h",
             text=hover_data,
             hoverinfo="y+text",
             hovertemplate=hover_template,
-            marker=dict(color=style["colors"][1], line=dict(color=style["colors"][1], width=2)),
+            marker=dict(
+                color=style["colors"][1],
+                line=dict(color=style["colors"][1], width=2),
+            ),
         )
     )
+
     fig.add_trace(
         go.Bar(
             y=list(cv_dates.keys()),
-            x=[cv_dates[fold]["train_start"] for fold in cv_dates.keys()],
+            x=[cv_dates[fold]["train_start"] for fold in cv_dates],
             name="",
             orientation="h",
             text=hover_data,
             hoverinfo="y+text",
             hovertemplate=hover_template,
-            marker=dict(color=style["colors"][0], line=dict(color=style["colors"][1], width=2)),
+            marker=dict(
+                color=style["colors"][0],
+                line=dict(color=style["colors"][1], width=2),
+            ),
         )
     )
+
     fig.add_trace(
         go.Bar(
             y=list(cv_dates.keys()),
-            x=[cv_dates[fold]["train_end"] for fold in cv_dates.keys()],
+            x=[cv_dates[fold]["train_end"] for fold in cv_dates],
             name="",
             orientation="h",
             text=hover_data,
             hoverinfo="y+text",
             hovertemplate=hover_template,
-            marker=dict(color=style["colors"][0], line=dict(color=style["colors"][1], width=2)),
+            marker=dict(
+                color=style["colors"][0],
+                line=dict(color=style["colors"][1], width=2),
+            ),
         )
     )
+
     fig.update_layout(
         showlegend=False,
         barmode="overlay",

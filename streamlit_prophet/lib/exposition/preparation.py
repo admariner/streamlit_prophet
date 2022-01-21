@@ -56,7 +56,7 @@ def get_forecast_components_col_names(forecast_df: pd.DataFrame) -> List[Any]:
     list
         List of columns to keep in forecast dataframe to get all components without upper/lower bounds.
     """
-    components_col = [
+    return [
         col.replace("_lower", "")
         for col in forecast_df.columns
         if "lower" in col
@@ -64,7 +64,6 @@ def get_forecast_components_col_names(forecast_df: pd.DataFrame) -> List[Any]:
         and "multiplicative" not in col
         and "additive" not in col
     ]
-    return components_col
 
 
 def get_components_mapping(
@@ -184,21 +183,19 @@ def get_cv_dates_dict(dates: Dict[Any, Any], resampling: Dict[Any, Any]) -> Dict
     freq = resampling["freq"][-1]
     train_start = dates["train_start_date"]
     horizon = dates["folds_horizon"]
-    cv_dates: Dict[Any, Any] = dict()
-    for i, cutoff in sorted(enumerate(dates["cutoffs"]), reverse=True):
-        cv_dates[f"Fold {i + 1}"] = dict()
-        cv_dates[f"Fold {i + 1}"]["train_start"] = train_start
-        cv_dates[f"Fold {i + 1}"]["val_start"] = cutoff
-        cv_dates[f"Fold {i + 1}"]["train_end"] = cutoff
-        if freq in ["s", "H"]:
-            cv_dates[f"Fold {i + 1}"]["val_end"] = cutoff + timedelta(
-                seconds=convert_into_nb_of_seconds(freq, horizon)
-            )
-        else:
-            cv_dates[f"Fold {i + 1}"]["val_end"] = cutoff + timedelta(
-                days=convert_into_nb_of_days(freq, horizon)
-            )
-    return cv_dates
+    return {
+        f"Fold {i + 1}": {
+            'train_start': train_start,
+            'val_start': cutoff,
+            'train_end': cutoff,
+            'val_end': cutoff
+            + timedelta(seconds=convert_into_nb_of_seconds(freq, horizon))
+            if freq in ["s", "H"]
+            else cutoff
+            + timedelta(days=convert_into_nb_of_days(freq, horizon)),
+        }
+        for i, cutoff in sorted(enumerate(dates["cutoffs"]), reverse=True)
+    }
 
 
 def get_hover_template_cv(

@@ -54,7 +54,7 @@ def make_dimensions_test(df: pd.DataFrame, frac: float = 0.5, agg: Any = "Mean")
     dict
         Dimensions dictionary that will be used for unit tests.
     """
-    dimensions = dict()
+    dimensions = {}
     dimensions_cols = _autodetect_dimensions(df)
     for col in dimensions_cols:
         values = list(df[col].unique())

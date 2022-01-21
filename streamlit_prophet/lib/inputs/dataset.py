@@ -179,8 +179,8 @@ def input_future_regressors(
             f"to **{end.strftime('%Y-%m-%d')}** at the same frequency as input dataset "
             f"and at format **{load_options['date_format']}**. \n"
         )
-        dimensions_col = [col for col in dimensions.keys() if col != "agg"]
-        if len(dimensions_col) > 0:
+        dimensions_col = [col for col in dimensions if col != "agg"]
+        if dimensions_col:
             if len(dimensions_col) > 1:
                 tooltip += (
                     f"- Columns with the following names for dimensions: `{', '.join(dimensions_col[:-1])}, "
