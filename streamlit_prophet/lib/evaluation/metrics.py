@@ -183,11 +183,7 @@ def _preprocess_eval_df(evaluation_df: pd.DataFrame, use_cv: bool) -> pd.DataFra
     pd.DataFrame
         Preprocessed evaluation dataframe.
     """
-    if use_cv:
-        df = evaluation_df.copy()
-    else:
-        df = add_time_groupers(evaluation_df)
-    return df
+    return evaluation_df.copy() if use_cv else add_time_groupers(evaluation_df)
 
 
 def _compute_metrics(df: pd.DataFrame, eval: Dict[Any, Any]) -> pd.DataFrame:

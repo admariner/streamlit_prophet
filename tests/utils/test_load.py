@@ -23,4 +23,4 @@ def test_download_toy_dataset(url, date, target):
     # The output is a pandas dataframe
     assert isinstance(output, pd.DataFrame)
     # Date and target columns are in the output dataframe columns
-    assert all([x in output.columns for x in [date, target]])
+    assert all(x in output.columns for x in [date, target])

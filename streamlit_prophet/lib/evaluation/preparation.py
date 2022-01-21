@@ -76,7 +76,7 @@ def add_time_groupers(evaluation_df: pd.DataFrame) -> pd.DataFrame:
     """
     df = evaluation_df.copy()
     df["Global"] = "Global"
-    df["Daily"] = df["ds"].astype(str).map(lambda x: x[0:10])
+    df["Daily"] = df["ds"].astype(str).map(lambda x: x[:10])
     df["Day of Week"] = (
         df["ds"].dt.dayofweek.map(lambda x: x + 1).astype(str) + ". " + df["ds"].dt.day_name()
     )

@@ -53,7 +53,7 @@ def plot_overview(
         List of all report components.
     """
     display_expander(readme, "overview", "More info on this plot")
-    bool_param = False if cleaning["log_transform"] else True
+    bool_param = not cleaning["log_transform"]
     if make_future_forecast:
         model = models["future"]
         forecast = forecasts["future"]
@@ -245,7 +245,7 @@ def plot_future(
         List of all report components.
     """
     display_expander(readme, "future", "More info on this plot")
-    bool_param = False if cleaning["log_transform"] else True
+    bool_param = not cleaning["log_transform"]
     fig = plot_plotly(
         models["future"],
         forecasts["future"],
@@ -431,7 +431,7 @@ def plot_residuals_distrib(eval_df: pd.DataFrame, use_cv: bool, style: Dict[Any,
         title_x=0.5,
         title_y=0.85,
         xaxis_title="Error (Forecast - Truth)",
-        showlegend=True if use_cv else False,
+        showlegend=use_cv,
         xaxis_zeroline=True,
         xaxis_zerolinecolor=style["color_axis"],
         xaxis_zerolinewidth=1,
@@ -442,6 +442,7 @@ def plot_residuals_distrib(eval_df: pd.DataFrame, use_cv: bool, style: Dict[Any,
         height=500,
         width=800,
     )
+
     return fig
 
 
@@ -470,8 +471,13 @@ def plot_detailed_metrics(
     report: List[Dict[str, Any]]
         List of all report components.
     """
-    metrics = [metric for metric in perf.keys() if perf[metric][eval["granularity"]].nunique() > 1]
-    if len(metrics) > 0:
+    metrics = [
+        metric
+        for metric in perf
+        if perf[metric][eval["granularity"]].nunique() > 1
+    ]
+
+    if metrics:
         fig = make_subplots(
             rows=len(metrics) // 2 + len(metrics) % 2, cols=2, subplot_titles=metrics
         )

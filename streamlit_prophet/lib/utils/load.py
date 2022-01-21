@@ -91,8 +91,7 @@ def download_toy_dataset(url: str) -> pd.DataFrame:
         Loaded dataset.
     """
     download = requests.get(url).content
-    df = pd.read_csv(io.StringIO(download.decode("utf-8")))
-    return df
+    return pd.read_csv(io.StringIO(download.decode("utf-8")))
 
 
 @st.cache(ttl=300)

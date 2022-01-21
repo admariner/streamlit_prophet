@@ -18,5 +18,4 @@ def reverse_list(L: List[Any], N: int) -> List[Any]:
     """
     if N < len(L):
         L = L[:N]
-    reversed_list = [L[len(L) - 1 - i] for i, x in enumerate(L)]
-    return reversed_list
+    return [L[len(L) - 1 - i] for i, x in enumerate(L)]

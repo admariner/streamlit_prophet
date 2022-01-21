@@ -35,8 +35,7 @@ def get_dataframe_download_link(df: pd.DataFrame, filename: str, linkname: str) 
     """
     csv = df.to_csv()
     b64 = base64.b64encode(csv.encode()).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="{filename}.csv">{linkname}</a>'
-    return href
+    return f'<a href="data:file/csv;base64,{b64}" download="{filename}.csv">{linkname}</a>'
 
 
 def get_config_download_link(config: Dict[Any, Any], filename: str, linkname: str) -> str:
@@ -57,12 +56,11 @@ def get_config_download_link(config: Dict[Any, Any], filename: str, linkname: st
         Download link.
     """
     config_template = config.copy()
-    if "datasets" in config_template.keys():
+    if "datasets" in config_template:
         del config_template["datasets"]
     toml_string = toml.dumps(config)
     b64 = base64.b64encode(toml_string.encode()).decode()
-    href = f'<a href="data:file/toml;base64,{b64}" download="{filename}">{linkname}</a>'
-    return href
+    return f'<a href="data:file/toml;base64,{b64}" download="{filename}">{linkname}</a>'
 
 
 def get_plotly_download_link(fig: go.Figure, filename: str, linkname: str) -> str:
@@ -86,8 +84,7 @@ def get_plotly_download_link(fig: go.Figure, filename: str, linkname: str) -> st
     fig.write_html(buffer)
     html_bytes = buffer.getvalue().encode()
     encoded = b64encode(html_bytes).decode()
-    href = f'<a href="data:text/html;base64,{encoded}" download="{filename}.html">{linkname}</a>'
-    return href
+    return f'<a href="data:text/html;base64,{encoded}" download="{filename}.html">{linkname}</a>'
 
 
 def display_dataframe_download_link(
@@ -274,7 +271,7 @@ def create_report_zip_file(
         zipObj.write(file_path, arcname=file_name)
     # Save default config
     default_config = config.copy()
-    if "datasets" in default_config.keys():
+    if "datasets" in default_config:
         del default_config["datasets"]
     file_name = f"{report_name}/config/default_config.toml"
     file_path = _get_file_path(file_name)
@@ -456,6 +453,6 @@ def display_links(repo_link: str, article_link: str) -> None:
         unsafe_allow_html=True,
     )
     st.sidebar.markdown(
-        f'<div style="text-align: center"> (Open in a new tab) </div>',
+        '<div style="text-align: center"> (Open in a new tab) </div>',
         unsafe_allow_html=True,
     )

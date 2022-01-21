@@ -59,7 +59,11 @@ def test_forecast_workflow(use_cv, make_future_forecast, evaluate):
         load_options,
     )
     # All dataframes in forecasts dictionary have at least a 'ds' column and a 'yhat' column
-    assert all([len({"ds", "yhat"}.intersection(set(x.columns))) == 2 for x in forecasts.values()])
+    assert all(
+        len({"ds", "yhat"}.intersection(set(x.columns))) == 2
+        for x in forecasts.values()
+    )
+
     # Models dictionary contains 2 models if a forecast has been made on future dates and 1 otherwise
     assert len(models) == make_future_forecast + evaluate
     if evaluate:

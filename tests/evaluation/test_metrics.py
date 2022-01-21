@@ -9,18 +9,7 @@ from tests.samples.df import df_test
 from tests.samples.dict import make_eval_test
 
 
-@pytest.mark.parametrize(
-    "y_true, y_pred, expected_min, expected_max",
-    [
-        (pd.Series(range(1, 11)), pd.Series(range(0, 10)), 0.29, 0.30),
-        (pd.Series(range(0, 10)), pd.Series(range(1, 11)), 0.31, 0.32),
-        (pd.Series(), pd.Series(range(1, 11)), 0, 0),
-        (pd.Series(range(1, 11)), pd.Series(), 0, 0),
-        (pd.Series(), pd.Series(), 0, 0),
-        (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0),
-        (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.25, 0.25),
-    ],
-)
+@pytest.mark.parametrize("y_true, y_pred, expected_min, expected_max", [(pd.Series(range(1, 11)), pd.Series(range(10)), 0.29, 0.30), (pd.Series(range(10)), pd.Series(range(1, 11)), 0.31, 0.32), (pd.Series(), pd.Series(range(1, 11)), 0, 0), (pd.Series(range(1, 11)), pd.Series(), 0, 0), (pd.Series(), pd.Series(), 0, 0), (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0), (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.25, 0.25)])
 def test_MAPE(y_true, y_pred, expected_min, expected_max):
     output = MAPE(y_true, y_pred)
     # MAPE should have the expected value
@@ -28,18 +17,7 @@ def test_MAPE(y_true, y_pred, expected_min, expected_max):
     assert output <= expected_max
 
 
-@pytest.mark.parametrize(
-    "y_true, y_pred, expected_min, expected_max",
-    [
-        (pd.Series(range(1, 11)), pd.Series(range(0, 10)), 0.42, 0.43),
-        (pd.Series(range(0, 10)), pd.Series(range(1, 11)), 0.42, 0.43),
-        (pd.Series(), pd.Series(range(1, 11)), 0, 0),
-        (pd.Series(range(1, 11)), pd.Series(), 0, 0),
-        (pd.Series(), pd.Series(), 0, 0),
-        (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0),
-        (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.33, 0.34),
-    ],
-)
+@pytest.mark.parametrize("y_true, y_pred, expected_min, expected_max", [(pd.Series(range(1, 11)), pd.Series(range(10)), 0.42, 0.43), (pd.Series(range(10)), pd.Series(range(1, 11)), 0.42, 0.43), (pd.Series(), pd.Series(range(1, 11)), 0, 0), (pd.Series(range(1, 11)), pd.Series(), 0, 0), (pd.Series(), pd.Series(), 0, 0), (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0), (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.33, 0.34)])
 def test_SMAPE(y_true, y_pred, expected_min, expected_max):
     output = SMAPE(y_true, y_pred)
     # SMAPE should have the expected value
@@ -47,18 +25,7 @@ def test_SMAPE(y_true, y_pred, expected_min, expected_max):
     assert output <= expected_max
 
 
-@pytest.mark.parametrize(
-    "y_true, y_pred, expected_min, expected_max",
-    [
-        (pd.Series(range(1, 11)), pd.Series(range(0, 10)), 1, 1),
-        (pd.Series(range(0, 10)), pd.Series(range(1, 11)), 1, 1),
-        (pd.Series(), pd.Series(range(1, 11)), 0, 0),
-        (pd.Series(range(1, 11)), pd.Series(), 0, 0),
-        (pd.Series(), pd.Series(), 0, 0),
-        (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0),
-        (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.5, 0.5),
-    ],
-)
+@pytest.mark.parametrize("y_true, y_pred, expected_min, expected_max", [(pd.Series(range(1, 11)), pd.Series(range(10)), 1, 1), (pd.Series(range(10)), pd.Series(range(1, 11)), 1, 1), (pd.Series(), pd.Series(range(1, 11)), 0, 0), (pd.Series(range(1, 11)), pd.Series(), 0, 0), (pd.Series(), pd.Series(), 0, 0), (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0), (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.5, 0.5)])
 def test_MSE(y_true, y_pred, expected_min, expected_max):
     output = MSE(y_true, y_pred)
     # MSE should have the expected value
@@ -66,18 +33,7 @@ def test_MSE(y_true, y_pred, expected_min, expected_max):
     assert output <= expected_max
 
 
-@pytest.mark.parametrize(
-    "y_true, y_pred, expected_min, expected_max",
-    [
-        (pd.Series(range(1, 11)), pd.Series(range(0, 10)), 1, 1),
-        (pd.Series(range(0, 10)), pd.Series(range(1, 11)), 1, 1),
-        (pd.Series(), pd.Series(range(1, 11)), 0, 0),
-        (pd.Series(range(1, 11)), pd.Series(), 0, 0),
-        (pd.Series(), pd.Series(), 0, 0),
-        (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0),
-        (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.70, 0.71),
-    ],
-)
+@pytest.mark.parametrize("y_true, y_pred, expected_min, expected_max", [(pd.Series(range(1, 11)), pd.Series(range(10)), 1, 1), (pd.Series(range(10)), pd.Series(range(1, 11)), 1, 1), (pd.Series(), pd.Series(range(1, 11)), 0, 0), (pd.Series(range(1, 11)), pd.Series(), 0, 0), (pd.Series(), pd.Series(), 0, 0), (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0), (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.70, 0.71)])
 def test_RMSE(y_true, y_pred, expected_min, expected_max):
     output = RMSE(y_true, y_pred)
     # RMSE should have the expected value
@@ -85,18 +41,7 @@ def test_RMSE(y_true, y_pred, expected_min, expected_max):
     assert output <= expected_max
 
 
-@pytest.mark.parametrize(
-    "y_true, y_pred, expected_min, expected_max",
-    [
-        (pd.Series(range(1, 11)), pd.Series(range(0, 10)), 1, 1),
-        (pd.Series(range(0, 10)), pd.Series(range(1, 11)), 1, 1),
-        (pd.Series(), pd.Series(range(1, 11)), 0, 0),
-        (pd.Series(range(1, 11)), pd.Series(), 0, 0),
-        (pd.Series(), pd.Series(), 0, 0),
-        (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0),
-        (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.5, 0.5),
-    ],
-)
+@pytest.mark.parametrize("y_true, y_pred, expected_min, expected_max", [(pd.Series(range(1, 11)), pd.Series(range(10)), 1, 1), (pd.Series(range(10)), pd.Series(range(1, 11)), 1, 1), (pd.Series(), pd.Series(range(1, 11)), 0, 0), (pd.Series(range(1, 11)), pd.Series(), 0, 0), (pd.Series(), pd.Series(), 0, 0), (pd.Series([1, np.nan, np.nan]), pd.Series([1, 1, np.nan]), 0, 0), (pd.Series([1, 2, np.nan]), pd.Series([1, 1, np.nan]), 0.5, 0.5)])
 def test_MAE(y_true, y_pred, expected_min, expected_max):
     output = MAE(y_true, y_pred)
     # MAE should have the expected value
